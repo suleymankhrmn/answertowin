@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+  }
+.start-bg{
+    background-image: url("../img/optical.jpg");
+    /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  position: absolute;
+    width: 100%;
+}
+
+.center-header{
+    display: table;
+    margin: 0 auto;
+
+}
+.card-position{
+  top: 20%;
+  
+}
+.card-opacity{
+  
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  box-sizing: border-box;
+  
+}
+
+.progressbar-height{
+  height: 10px !important;
+  
+
+    
+    
+}
