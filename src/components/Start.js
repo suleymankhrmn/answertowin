@@ -6,12 +6,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRocket, faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
 
 import { Link } from 'react-router-dom'
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as startActions from "../redux/actions/startActions"
+
 const element = <FontAwesomeIcon icon={faRocket} />
 const arrowRight = <FontAwesomeIcon icon={faAngleDoubleRight} />
 const arrowLeft = <FontAwesomeIcon icon={faAngleDoubleLeft} />
+
+
+
 class Start extends Component {
 
     render() {
+        
+        console.log(this.props.difficltyLevel.Beginner)
         return (
             <div className="start-bg">
 
@@ -49,15 +60,15 @@ class Start extends Component {
                                 
                                 <ProgressBar className="progressbar-height" >
 
-                                    <ProgressBar variant="success" now={25} key={1} />
-                                    <ProgressBar variant="primary" now={25} key={2} />
-                                    <ProgressBar variant="warning" now={25} key={3} />
-                                    <ProgressBar variant="danger" now={25} key={4} />
+                                    <ProgressBar variant="success" now={this.props.difficltyLevel["Beginner"]} key={1} />
+                                    <ProgressBar variant="primary" now={this.props.difficltyLevel["Medium"]} key={2} />
+                                    <ProgressBar variant="warning" now={this.props.difficltyLevel["Hard"]} key={3} />
+                                    <ProgressBar variant="danger" now={this.props.difficltyLevel["VeryHard"]} key={4} />
                                 </ProgressBar>
                             </Col>
                             <Col className="text-center" lg="4">
-                                <Button className="mr-2">{arrowLeft}</Button>
-                                <Button className="ml-2 danger-dark">{arrowRight}</Button>
+                                <Button className="mr-2" onClick={()=> this.props.actions.decreaseDifficultyLevel(this.props.difficltyLevel)} >{arrowLeft}</Button>
+                                <Button className="ml-2 danger-dark" onClick={()=> this.props.actions.increaseDifficultyLevel(this.props.difficltyLevel)}>{arrowRight}</Button>
                             </Col>
                         </Row>
 
@@ -89,5 +100,19 @@ class Start extends Component {
     }
 }
 
+function mapStateToProps(state){
+    console.log("dddddddd")
+    return{
+        difficltyLevel:state.startReducer
+    }
+}
+function mapDispatchToProps(dispatch){
+    return{
+        actions:{
+            increaseDifficultyLevel: bindActionCreators(startActions.increaseDifficultyLevel, dispatch),
+            decreaseDifficultyLevel: bindActionCreators(startActions.decreaseDifficultyLevel,dispatch)
+        }
+    }
+}
 
-export default Start;
+export default connect(mapStateToProps, mapDispatchToProps)(Start);

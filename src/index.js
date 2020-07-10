@@ -6,9 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {BrowserRouter} from 'react-router-dom'
 
+import {Provider} from "react-redux"
+import configureStore from "./redux/reducers/configureStore"
+
+const store = configureStore();
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store = {store}>
+      <App />
+    </Provider>
+    
   </BrowserRouter>,
   document.getElementById('root')
 );
